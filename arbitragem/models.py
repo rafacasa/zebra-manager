@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from jogos.models import Partida
 
 # Create your models here.
 # TODO ver sobre classe Meta
@@ -13,14 +12,17 @@ class GrupoArbitragem(models.Model):
     )
     admins_grupo = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
+        related_name="admins_grupo",
         verbose_name="Administradores do Grupo",
     )
     membros_grupo = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
+        related_name="membros_grupo",
         verbose_name="Membros do Grupo",
     )
     requisicao_pendente = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
+        related_name="requisicao_pendente",
         verbose_name="Usuarios com Requisicao Pendente",  # TODO acento
     )
 
@@ -38,7 +40,7 @@ class PosicaoEscala(models.Model):
 
 class Escala(models.Model):
     partida = models.ForeignKey(
-        Partida,
+        "jogos.Partida",
         on_delete=models.CASCADE,
         verbose_name="Partida",
     )

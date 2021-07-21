@@ -76,7 +76,7 @@ class Partida(models.Model):
         max_length=200,
         blank=True,
     )  # TODO: acentuacao
-    escala = models.ManyToManyField(
+    escala_arbitragem = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         through=Escala,
         through_fields=("partida", "arbitro"),
