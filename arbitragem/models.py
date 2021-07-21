@@ -26,6 +26,10 @@ class GrupoArbitragem(models.Model):
         verbose_name="Usuarios com Requisicao Pendente",  # TODO acento
     )
 
+    class Meta:
+        verbose_name = "Grupo de Arbitragem"
+        verbose_name_plural = "Grupos de Arbitragem"
+
 
 class PosicaoEscala(models.Model):
     nome = models.CharField(
@@ -36,6 +40,10 @@ class PosicaoEscala(models.Model):
         "Sigla",
         max_length=20,
     )
+
+    class Meta:
+        verbose_name = "Posicao da Arbitragem"  # TODO acento
+        verbose_name_plural = "Posicoes da Arbitragem"
 
 
 class Escala(models.Model):
@@ -54,3 +62,7 @@ class Escala(models.Model):
         on_delete=models.PROTECT,
         verbose_name="Posicao",  # TODO acento
     )
+
+    class Meta:
+        verbose_name = "Escala"
+        verbose_name_plural = "Escalas"

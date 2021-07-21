@@ -12,6 +12,10 @@ class Time(models.Model):  # TODO: Pensar o q colocar no time
         unique=True,
     )
 
+    class Meta:
+        verbose_name = "Time"
+        verbose_name_plural = "Times"
+
 
 class Competicao(models.Model):
     nome = models.CharField(
@@ -29,12 +33,20 @@ class Competicao(models.Model):
         default=True,
     )
 
+    class Meta:
+        verbose_name = "Competicao"
+        verbose_name_plural = "Competicoes"  # TODO acento
+
 
 class Estadio(models.Model):  # TODO: colocar endereco do estadio
     nome_estadio = models.CharField(
         "Nome do Estádio",
         max_length=200,
     )
+
+    class Meta:
+        verbose_name = "Estadio"
+        verbose_name_plural = "Estadios"  # TODO acentos
 
 
 class Partida(models.Model):
@@ -86,3 +98,7 @@ class Partida(models.Model):
         "Periodos Extra",  # TODO acento
         default=0,
     )
+
+    class Meta:
+        verbose_name = "Partida"
+        verbose_name_plural = "Partidas"

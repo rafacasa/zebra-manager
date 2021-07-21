@@ -13,6 +13,10 @@ class Falta(models.Model):
         max_length=200,
     )
 
+    class Meta:
+        verbose_name = "Falta"
+        verbose_name_plural = "Faltas"
+
 
 class Penalidade(models.Model):
     partida = models.ForeignKey(
@@ -33,3 +37,7 @@ class Penalidade(models.Model):
     periodo = models.IntegerField(
         "Periodo de Jogo",
     )  # TODO Validar caso periodo extra colocado em jogo que foi a periodos extras
+
+    class Meta:
+        verbose_name = "Penalidade"
+        verbose_name_plural = "Penalidades"
