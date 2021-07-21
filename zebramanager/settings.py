@@ -28,12 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # User Settings
-AUTH_USER_MODEL = "arbitragem.Usuario"
+AUTH_USER_MODEL = "autenticacao.Usuario"
 
 # Application definition
 
 INSTALLED_APPS = [
     "arbitragem.apps.ArbitragemConfig",
+    "autenticacao.apps.AutenticacaoConfig",
     "faltas.apps.FaltasConfig",
     "jogos.apps.JogosConfig",
     "django.contrib.admin",
