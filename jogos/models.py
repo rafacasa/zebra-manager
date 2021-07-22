@@ -3,7 +3,6 @@ from django.conf import settings
 from django.db import models
 
 
-# TODO ver sobre classe Meta
 # Create your models here.
 class Time(models.Model):  # TODO: Pensar o q colocar no time
     nome = models.CharField(
@@ -19,23 +18,23 @@ class Time(models.Model):  # TODO: Pensar o q colocar no time
 
 class Competicao(models.Model):
     nome = models.CharField(
-        "Nome da Competicao",
+        "Nome da Competição",
         max_length=200,
-    )  # TODO: acentuacao
+    )
     data_inicio = models.DateField(
-        "Inicio da Competicao",
-    )  # TODO: acentuacao
+        "Início da Competição",
+    )
     data_final = models.DateField(
-        "Final da Competicao",
-    )  # TODO: acentuacao
+        "Final da Competição",
+    )
     esta_em_andamento = models.BooleanField(
         "Em Andamento?",
         default=True,
     )
 
     class Meta:
-        verbose_name = "Competicao"
-        verbose_name_plural = "Competicoes"  # TODO acento
+        verbose_name = "Competição"
+        verbose_name_plural = "Competições"
 
 
 class Estadio(models.Model):  # TODO: colocar endereco do estadio
@@ -45,8 +44,8 @@ class Estadio(models.Model):  # TODO: colocar endereco do estadio
     )
 
     class Meta:
-        verbose_name = "Estadio"
-        verbose_name_plural = "Estadios"  # TODO acentos
+        verbose_name = "Estádio"
+        verbose_name_plural = "Estádios"
 
 
 class Partida(models.Model):
@@ -81,13 +80,13 @@ class Partida(models.Model):
     competicao = models.ForeignKey(
         Competicao,
         on_delete=models.PROTECT,
-        verbose_name="Competicao",  # TODO: acentuacao
+        verbose_name="Competição",
     )
     link_video = models.URLField(
-        "Video da Partida",
+        "Vídeo da Partida",
         max_length=200,
         blank=True,
-    )  # TODO: acentuacao
+    )
     escala_arbitragem = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         through=Escala,
@@ -95,7 +94,7 @@ class Partida(models.Model):
         verbose_name="Escala de Arbitragem",
     )
     quantidade_periodos_extra = models.IntegerField(
-        "Periodos Extra",  # TODO acento
+        "Períodos Extra",
         default=0,
     )
 

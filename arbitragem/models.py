@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db import models
 
 # Create your models here.
-# TODO ver sobre classe Meta
 
 
 class GrupoArbitragem(models.Model):
@@ -23,7 +22,7 @@ class GrupoArbitragem(models.Model):
     requisicao_pendente = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name="requisicao_pendente",
-        verbose_name="Usuarios com Requisicao Pendente",  # TODO acento
+        verbose_name="Usuários com Requisição Pendente",
     )
 
     class Meta:
@@ -33,17 +32,17 @@ class GrupoArbitragem(models.Model):
 
 class PosicaoEscala(models.Model):
     nome = models.CharField(
-        "Posicao",
+        "Posição",
         max_length=250,
-    )  # TODO acento
+    )
     sigla = models.CharField(
         "Sigla",
         max_length=20,
     )
 
     class Meta:
-        verbose_name = "Posicao da Arbitragem"  # TODO acento
-        verbose_name_plural = "Posicoes da Arbitragem"
+        verbose_name = "Posição da Arbitragem"
+        verbose_name_plural = "Posições da Arbitragem"
 
 
 class Escala(models.Model):
@@ -55,12 +54,12 @@ class Escala(models.Model):
     arbitro = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
-        verbose_name="Arbitro",  # TODO acento
+        verbose_name="Árbitro",
     )
     posicao = models.ForeignKey(
         PosicaoEscala,
         on_delete=models.PROTECT,
-        verbose_name="Posicao",  # TODO acento
+        verbose_name="Posição",
     )
 
     class Meta:
