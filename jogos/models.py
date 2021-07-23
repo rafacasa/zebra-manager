@@ -1,6 +1,7 @@
 from arbitragem.models import Escala
 from django.conf import settings
 from django.db import models
+from localflavor.br import models as brmodels
 
 
 # Create your models here.
@@ -10,6 +11,13 @@ class Time(models.Model):  # TODO: Pensar o q colocar no time
         max_length=200,
         unique=True,
     )
+    esta_ativo = models.BooleanField(
+        "Está Ativo?",
+        default=True,
+    )
+
+    def __str__(self):
+        return f"{self.nome}"
 
     class Meta:
         verbose_name = "Time"
@@ -45,6 +53,24 @@ class Estadio(models.Model):  # TODO: colocar endereco do estadio
         "Nome do Estádio",
         max_length=200,
     )
+    endereco_estadio = models.CharField(
+        "Endereco do Estadio",
+        max_length=200,
+        blank=True,
+    )  # TODO acento
+    cidade_estadio = models.CharField(
+        "Cidade",
+        max_length=200,
+        blank=True,
+    )
+    estado_estadio = brmodels.BRStateField(
+        "Estado",
+        blank=True,
+    )
+    cep_estadio = brmodels.BRPostalCodeField(
+        "CEP",
+        blank=True,
+    )
 
     def __str__(self):
         return f"{self.nome_estadio}"
@@ -58,12 +84,14 @@ class Partida(models.Model):
     mandante = models.ForeignKey(
         Time,
         on_delete=models.PROTECT,
+        limit_choices_to={"esta_ativo": True},
         related_name="mandante",
         verbose_name="Time Mandante",
     )
     visitante = models.ForeignKey(
         Time,
         on_delete=models.PROTECT,
+        limit_choices_to={"esta_ativo": True},
         related_name="visitante",
         verbose_name="Time Visitante",
     )
@@ -104,6 +132,9 @@ class Partida(models.Model):
         "Houve Período Extra?",
         default=False,
     )
+
+    def __str__(self):
+        return f"{self.mandante} vs {self.visitante}"
 
     class Meta:
         verbose_name = "Partida"

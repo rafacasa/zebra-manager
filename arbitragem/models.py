@@ -40,6 +40,9 @@ class PosicaoEscala(models.Model):
         max_length=20,
     )
 
+    def __str__(self):
+        return f"{self.sigla}"
+
     class Meta:
         verbose_name = "Posição da Arbitragem"
         verbose_name_plural = "Posições da Arbitragem"
