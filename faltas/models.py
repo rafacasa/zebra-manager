@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from jogos.models import Partida, Time
 
 
@@ -19,6 +20,13 @@ class Falta(models.Model):
 
 
 class Penalidade(models.Model):
+    class Periodo(models.TextChoices):
+        PRIMEIRO_QUARTO = "1Q", _("1º Quarto")
+        SEGUNDO_QUARTO = "2Q", _("2º Quarto")
+        TERCEIRO_QUARTO = "3Q", _("3º Quarto")
+        QUARTO_QUARTO = "4Q", _("4º Quarto")
+        PERIODO_EXTRA = "EX", _("Período Extra")
+
     partida = models.ForeignKey(
         Partida,
         on_delete=models.CASCADE,
@@ -34,8 +42,12 @@ class Penalidade(models.Model):
         on_delete=models.PROTECT,
         verbose_name="Falta Cometida",
     )
-    periodo = models.IntegerField(
+    periodo_da_falta = models.CharField(
         "Periodo de Jogo",
+        max_length=2,
+        choices=Periodo.choices,
+        default=Periodo.PRIMEIRO_QUARTO,
+        blank=False,
     )  # TODO Validar caso periodo extra colocado em jogo que foi a periodos extras
 
     class Meta:

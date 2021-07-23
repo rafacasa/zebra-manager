@@ -93,9 +93,9 @@ class Partida(models.Model):
         through_fields=("partida", "arbitro"),
         verbose_name="Escala de Arbitragem",
     )
-    quantidade_periodos_extra = models.IntegerField(
-        "Períodos Extra",
-        default=0,
+    teve_periodo_extra = models.BooleanField(
+        "Houve Período Extra?",
+        default=False,
     )
 
     class Meta:
