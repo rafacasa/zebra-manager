@@ -27,10 +27,13 @@ class Competicao(models.Model):
     data_final = models.DateField(
         "Final da Competição",
     )
-    esta_em_andamento = models.BooleanField(
-        "Em Andamento?",
+    esta_ativa = models.BooleanField(
+        "Está Ativa?",
         default=True,
     )
+
+    def __str__(self):
+        return f"{self.nome}"
 
     class Meta:
         verbose_name = "Competição"
@@ -42,6 +45,9 @@ class Estadio(models.Model):  # TODO: colocar endereco do estadio
         "Nome do Estádio",
         max_length=200,
     )
+
+    def __str__(self):
+        return f"{self.nome_estadio}"
 
     class Meta:
         verbose_name = "Estádio"
@@ -80,6 +86,7 @@ class Partida(models.Model):
     competicao = models.ForeignKey(
         Competicao,
         on_delete=models.PROTECT,
+        limit_choices_to={"esta_ativa": True},
         verbose_name="Competição",
     )
     link_video = models.URLField(
