@@ -1,6 +1,7 @@
 from arbitragem.models import Escala
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
 from localflavor.br import models as brmodels
 
 
@@ -15,9 +16,17 @@ class Time(models.Model):  # TODO: Pensar o q colocar no time
         "Está Ativo?",
         default=True,
     )
+    slug_time = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
         return f"{self.nome}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug_time:
+            slug = f"{slugify(self.nome)}"
+            self.slug_time = slug
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Time"
@@ -39,9 +48,17 @@ class Competicao(models.Model):
         "Está Ativa?",
         default=True,
     )
+    slug_competicao = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
         return f"{self.nome}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug_competicao:
+            slug = f"{slugify(self.nome)}"
+            self.slug_competicao = slug
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Competição"
